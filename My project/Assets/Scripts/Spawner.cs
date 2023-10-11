@@ -1,19 +1,14 @@
 using System.Collections;
 using UnityEngine;
 
-
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private Transform[] _points;
+    [SerializeField] private Target[] _targets;
     [SerializeField] private Enemy _enemy;
     [SerializeField] private float _delay;
 
-    private Vector3 _direction;
-
-    private void Awake()
-    {
-        _direction = Vector3.right;
-    }
+    
 
     private void Start()
     {
@@ -26,6 +21,12 @@ public class Spawner : MonoBehaviour
         return point;  
     }
 
+    private Target GetRandomTarget(Target[] targets)
+    {
+        Target target = targets[Random.Range(0, targets.Length)];
+        return target;
+    }
+
     private IEnumerator Creator()
     {
         WaitForSeconds delay = new WaitForSeconds(_delay);
@@ -33,7 +34,7 @@ public class Spawner : MonoBehaviour
         while(true)
         {
             Enemy enemy = Instantiate(_enemy, GetRandomPoint(_points).position, Quaternion.identity);
-            enemy.GetDirection(_direction);
+            enemy.GetTarget(GetRandomTarget(_targets));
             yield return delay; 
         }
     }
