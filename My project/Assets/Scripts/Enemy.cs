@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(_target.transform.position * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, _target.transform.position, _speed * Time.deltaTime);
     }
 
     public Target GetTarget(Target target)

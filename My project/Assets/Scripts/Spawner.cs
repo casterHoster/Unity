@@ -8,8 +8,6 @@ public class Spawner : MonoBehaviour
     [SerializeField] private Enemy _enemy;
     [SerializeField] private float _delay;
 
-    
-
     private void Start()
     {
         StartCoroutine(Creator());
